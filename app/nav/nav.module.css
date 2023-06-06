@@ -1,0 +1,37 @@
+.nav {
+    background-color: black;
+    padding-bottom: 200px;
+  }
+  
+  .ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .li {
+    margin: 0 10px;
+  }
+  
+  .glass_button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color 0.3s;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .glass_button:hover {
+    background-color: #c8cacc;
+    color: black;
+  }
+  
