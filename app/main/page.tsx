@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import getMemes from "../../lib/getMemes";
 import { Metadata } from "next/types";
+import style from "./main.module.css";
 
 
 export const metadata: Metadata = {
@@ -10,13 +11,16 @@ export const metadata: Metadata = {
 export default async function Main() {
   const memes: Promise <Meme[]> = getMemes();
   const meme = await memes;
+  meme.splice(-90);
 
   const content = (
-    <section>
-      <h2>Memes</h2>
+    <section className={style.main}>
+    <h2>First 10 memes</h2>
+    <div className={style.main_memes}>
       {meme.map((meme:any) => 
-    <Image src={meme.url} alt="meme" width={100} height={100} key={meme.id} />
+    <div className={style.meme}><Image src={meme.url} alt="meme" width={250} height={250} key={meme.id} /><p>{meme.name}</p></div>
   )}
+    </div>
     </section>
   );
 
