@@ -16,6 +16,11 @@ export default function Nav() {
             Hot Memes
           </Link>
         </li>
+        <li className={style.li}>
+          <Link href="/" className={style.glass_button}>
+            Main
+          </Link>
+        </li>
       </ul>
     </nav>
   );
