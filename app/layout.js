@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Nav from "./nav/page";
 import Image from "next/image";
 import styles from "./page.module.css";
+import MainLayout from "./main/layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +37,6 @@ export default function RootLayout({ children }) {
               </a>
             </div>
           </div>
-
           <div className={styles.center}>{children}</div>
 
           <div className={styles.grid}>
