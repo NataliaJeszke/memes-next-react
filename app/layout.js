@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import Nav from "./nav/page";
 import Image from "next/image";
 import styles from "./page.module.css";
-import MainLayout from "./main/layout";
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <main className={styles.main}>
           <div className={styles.description}>
-            <p>Memes Next ReactJS Project</p>
+          <Link href="/"><p>Memes Next ReactJS Project</p></Link>
             <div>
               <a
                 href="https://github.com/NataliaJeszke"
