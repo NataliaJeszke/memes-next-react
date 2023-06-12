@@ -6,11 +6,9 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  let meme: Prisma.MemeCreateInput;
-
-  meme = {
+  const meme = {
     id: 1,
-    memeID: 1,
+    memeID: 222,
     title: "Elsa Prisma",
     likes: 10,
     dislikes: 5,
