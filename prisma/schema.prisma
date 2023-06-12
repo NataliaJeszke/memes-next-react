@@ -9,7 +9,7 @@ datasource db {
 
 model Meme {
   id       Int    @id @default(autoincrement())
-  memeID   Int
+  memeID   String @unique
   title    String
   likes    Int
   dislikes Int
