@@ -7,3 +7,11 @@ type Meme ={
     "box_count":number,
     "captions":number
 }
+
+type MemeDB = {
+    "id": number,
+    "title": string,
+    "likes": number,
+    "dislikes": number,
+    "memeID": string
+}

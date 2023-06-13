@@ -4,7 +4,12 @@ import getMemes from "../../lib/getMemes";
 import { Metadata } from "next/types";
 import style from "./main.module.css";
 import { Rating } from "../components/rating/rating";
+import { getMemesDB } from "../api/route";
 
+interface Memes {
+  memes: Meme[];
+  memesDB: MemeDB[];
+}
 
 export const metadata: Metadata = {
   title: "Main Memes"
@@ -13,6 +18,10 @@ export default async function Main() {
   const memes: Promise <Meme[]> = getMemes();
   const meme = await memes;
   meme.splice(-90);
+
+  const memesDB = getMemesDB();
+  const memeDB = await memesDB;
+  console.log(memeDB);
 
   const content = (
     <section className={style.main}>

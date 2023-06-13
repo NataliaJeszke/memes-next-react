@@ -13,6 +13,12 @@ export function Rate({ initialNumber=0, emotion }: RatingProps) {
     setNumber(number + 1);
   };
 
+  if (emotion === "Like") {
+    console.log(`Lajki +${number}`)
+  } else {
+    console.log(`Dislajki+${number}`)
+  }
+
   return (
     <div>
       <p onClick={handleClick}>{emotion}</p>

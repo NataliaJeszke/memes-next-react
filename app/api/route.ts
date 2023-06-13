@@ -9,7 +9,9 @@ async function memesAPI() {
 }
 
 export async function GET(request: Request) {
-  return new Response("Hello world!");
+  const memesDB: MemeDB[] = await prisma.meme.findMany();
+  const memesJSON = JSON.stringify(memesDB);
+  return new Response(memesJSON, { headers: { "Content-Type": "application/json" } });
 }
 
 export async function POST(request: Request) {
@@ -23,3 +25,10 @@ export async function POST(request: Request) {
     console.log("Meme created:", createMeme);
   }
 }
+
+export async function getMemesDB() {
+  const memesDB: MemeDB[] = await prisma.meme.findMany();
+  const memesJSON = JSON.stringify(memesDB);
+  return new Response(memesJSON, { headers: { "Content-Type": "application/json" } });
+}
+
