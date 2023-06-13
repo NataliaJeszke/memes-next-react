@@ -19,7 +19,7 @@ export default async function Main() {
     <h2>First 10 memes</h2>
     <div className={style.main_memes}>
       {meme.map((meme:any) => 
-    <div className={style.meme}><Image src={meme.url} alt="meme" width={250} height={250} key={meme.id} /><p>{meme.name}</p>
+    <div className={style.meme}><Image src={meme.url} alt="meme" width={250} height={250} key={meme.id} /><p>{meme.name}</p><p>{meme.id}</p>
     <Rating memeKey={meme.id}/>
     </div>
   )}
