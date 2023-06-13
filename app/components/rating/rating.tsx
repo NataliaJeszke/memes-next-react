@@ -1,35 +1,21 @@
 'use client'
-import { useState } from "react";
+
 import style from "./rating.module.css";
-import { Like } from "./like/like";
+import { Rate } from "../../../lib/rating";
 
 interface RatingProps{
     memeKey: string;
-    initialLike?: number;
 }
 
-export function Rating({memeKey}:RatingProps, _initLike: RatingProps){
-    console.log(memeKey)
-
-    const [like, setLike] = useState(_initLike.initialLike ?? 0)
-
-    const handleClickLike = () => {
-         console.log({memeKey})
-        setLike(like + 1);
-        return(
-            like
-        )
-        }
-
+export function Rating({memeKey}:RatingProps){
 
     return(
         <div className={style.rating_container}>
             <div>
-            <Like initialLike={like}/>
+            <Rate initialNumber={0} emotion="Like"/>
             </div>
             <div>
-            <p>Dislike</p>
-            <p>0</p>
+            <Rate initialNumber={0} emotion="Dislike"/>
             </div>
         </div>
     )
