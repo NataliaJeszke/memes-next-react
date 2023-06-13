@@ -3,6 +3,7 @@ import React from "react";
 import getMemes from "../../lib/getMemes";
 import { Metadata } from "next/types";
 import style from "./main.module.css";
+import { Rating } from "../components/rating/rating";
 
 
 export const metadata: Metadata = {
@@ -18,7 +19,9 @@ export default async function Main() {
     <h2>First 10 memes</h2>
     <div className={style.main_memes}>
       {meme.map((meme:any) => 
-    <div className={style.meme}><Image src={meme.url} alt="meme" width={250} height={250} key={meme.id} /><p>{meme.name}</p></div>
+    <div className={style.meme}><Image src={meme.url} alt="meme" width={250} height={250} key={meme.id} /><p>{meme.name}</p>
+    <Rating memeKey={meme.id}/>
+    </div>
   )}
     </div>
     </section>
