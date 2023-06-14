@@ -115,7 +115,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "app/api/route.ts", "lib/seed.js"  ],
+, "app/api/route.ts", "lib/seed.js", "app/testing/page.jsx", "app/api/updateLike/updateLike.js"  ],
   "exclude": [
     "node_modules"
   ]
