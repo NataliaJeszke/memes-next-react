@@ -32,6 +32,12 @@ export async function PUT() {
     },
   });
   console.log("Meme updated:", updateMeme);
+
+  const memesJSON = JSON.stringify({ message: "Meme updated" });
+
+  return new Response(memesJSON, {
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 export async function getMemes() {
