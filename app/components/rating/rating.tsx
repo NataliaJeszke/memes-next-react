@@ -1,7 +1,7 @@
 'use client'
 
 import style from "./rating.module.css";
-import { Rate } from "../../../lib/rate";
+import { Rate } from "../rate/rate";
 
 interface RatingProps{
     memeKey: string;

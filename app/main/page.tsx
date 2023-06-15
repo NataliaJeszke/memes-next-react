@@ -3,7 +3,7 @@ import React from "react";
 import { Metadata } from "next/types";
 import style from "./main.module.css";
 import { Rating } from "../components/rating/rating";
-import Stats from "../../lib/memeStats";
+import Stats from "../components/memeStats/memeStats";
 
 
 interface Memes {
@@ -14,13 +14,12 @@ interface Memes {
 export const metadata: Metadata = {
   title: "Main Memes"
 }
-export default async function Main() {
-
+export default async function Main({memes}: Memes) {
   const url = process.env.BACKEND_URL_API
   const response = await fetch(`${url}`, {
   method: 'GET',
 });
-const memes = await response.json();
+  memes = await response.json();
 
   const content = (
     <section className={style.main}>
@@ -28,7 +27,6 @@ const memes = await response.json();
     <div className={style.main_memes}>
       {memes.map((meme:any) => 
     <div className={style.meme}><Image src={meme.url} alt="meme" width={250} height={250} key={meme.memeID} /><p>{meme.title}</p>
-    <Rating  memeKey={meme.memeID}/>
     <Stats memeKey={meme.memeID}/>
     </div>
   )}

@@ -41,28 +41,26 @@ export async function GET() {
 //   });
 // }
 
-
-
 //<--- Update Likes in DB --->
-export async function PUT() {
-  let emotion = "Dislike";
+export async function PUT(request: Request) {
+  const { memeID, emotion, number } = await request.json();
   let updateData: any;
   if (emotion === "Like") {
     updateData = {
       where: {
-        memeID: "87743020",
+        memeID: memeID,
       },
       data: {
-        likes: 10,
+        likes: number,
       },
     };
   } else if (emotion === "Dislike") {
     updateData = {
       where: {
-        memeID: "87743020",
+        memeID: memeID,
       },
       data: {
-        dislikes: 10,
+        dislikes: number,
       },
     };
   } else {
@@ -78,8 +76,6 @@ export async function PUT() {
     headers: { "Content-Type": "application/json" },
   });
 }
-
-
 
 //////////////////////////////////////////////////////////////////////
 export async function memesAPI() {
