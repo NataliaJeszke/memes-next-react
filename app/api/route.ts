@@ -2,11 +2,12 @@ import { PrismaClient, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-
 export async function GET() {
   const memesDB: MemeDB[] = await prisma.meme.findMany();
   const memesJSON = JSON.stringify(memesDB);
-  return new Response(memesJSON, { headers: { "Content-Type": "application/json" } });
+  return new Response(memesJSON, {
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 // export async function POST(request: Request) {
@@ -21,24 +22,33 @@ export async function GET() {
 //   }
 // }
 
-
+export async function PUT() {
+  const updateMeme = await prisma.meme.update({
+    where: {
+      memeID: "87743020",
+    },
+    data: {
+      likes: 10,
+    },
+  });
+  console.log("Meme updated:", updateMeme);
+}
 
 export async function getMemes() {
   const url = "https://api.imgflip.com/get_memes";
-  try{
-      const res = await fetch(url);
-      const data = await res.json();
-      return data.data.memes;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data.data.memes;
+  } catch (error) {
+    console.log(error);
   }
-  catch(error){
-      console.log(error);
-  }
-
 }
 
 export async function getMemesDB() {
   const memesDB: MemeDB[] = await prisma.meme.findMany();
   const memesJSON = JSON.stringify(memesDB);
-  return new Response(memesJSON, { headers: { "Content-Type": "application/json" } });
+  return new Response(memesJSON, {
+    headers: { "Content-Type": "application/json" },
+  });
 }
-

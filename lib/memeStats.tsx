@@ -1,19 +1,19 @@
 import { PrismaClient } from '@prisma/client';
 import { getMemesDB } from '../app/api/route';
+import { Rating } from '../app/components/rating/rating';
 
 
 const prisma = new PrismaClient();
 
 interface MemesDB {
-    numbers: MemesDB[];
-    stats: any;
-    number: number;
+
+    memeKey: string;
   }
 
-async function memeStats() {
+async function memeStats(memeKey: string) {
     const updateMeme = await prisma.meme.update({
         where: {
-          memeID: "87743020",
+          memeID: memeKey,
         },
         data: {
           likes: 5,
@@ -23,13 +23,19 @@ async function memeStats() {
   }
 
 
-  export default function Stats(){
-        const stats = memeStats();
-        const numbers= getMemesDB();
-        console.log(stats)
-        console.log(numbers)
+
+  export default function Stats({memeKey}:MemesDB){
+        // const stats = memeStats();
+        // console.log(stats)
+
+
         return(
-            <p>tekst</p>
+            <div>
+                  <p>Likes z serwera</p>
+            <p>{memeKey}</p>
+            <Rating  memeKey={memeKey}/>
+            </div>
+          
         )
   }
 
