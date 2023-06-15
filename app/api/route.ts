@@ -43,26 +43,43 @@ export async function GET() {
 
 //<--- Update Likes in DB --->
 export async function PUT(request: Request) {
-  const { memeID, emotion, number } = await request.json();
+  const { memeID, emotion} = await request.json();
+
+  const meme = await prisma.meme.findUnique({
+    where: {
+      memeID: memeID,
+    },
+  });
+
   let updateData: any;
   if (emotion === "Like") {
-    updateData = {
-      where: {
-        memeID: memeID,
-      },
-      data: {
-        likes: number,
-      },
-    };
+    if (meme !== null) {
+      let likes = meme.likes;
+
+      updateData = {
+        where: {
+          memeID: memeID,
+        },
+        data: {
+          likes: likes + 1,
+        },
+      };
+    } else {
+      console.log("Error: meme not found");
+    }
   } else if (emotion === "Dislike") {
-    updateData = {
-      where: {
-        memeID: memeID,
-      },
-      data: {
-        dislikes: number,
-      },
-    };
+    if (meme !== null) {
+      let dislikes = meme.dislikes;
+
+      updateData = {
+        where: {
+          memeID: memeID,
+        },
+        data: {
+          dislikes: dislikes + 1,
+        },
+      };
+    }
   } else {
     console.log("Error: emotion not found");
   }

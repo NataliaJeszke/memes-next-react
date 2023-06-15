@@ -13,7 +13,7 @@ export function Rate({ initialNumber=0, emotion, memeID }: RatingProps) {
   const url = process.env.BACKEND_URL_API
 
   const handleClick = async () => {
-    setNumber((prevNumber) => prevNumber + 1); // Użyj funkcji callback do zwiększenia liczby
+    setNumber((prevNumber) => prevNumber + 1);
   };
   
   useEffect(() => {
@@ -25,7 +25,7 @@ export function Rate({ initialNumber=0, emotion, memeID }: RatingProps) {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ emotion: emotion, number: number, memeID: memeID }),
+            body: JSON.stringify({ emotion: emotion, memeID: memeID }),
           });
           const jsonData = await response.json();
           setData(jsonData);
@@ -37,8 +37,6 @@ export function Rate({ initialNumber=0, emotion, memeID }: RatingProps) {
     }
   }, [number]);
   
-
-
   return (
     <div>
       <p onClick={handleClick}>{emotion}</p>
