@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { getMemesDB } from '../app/api/route';
 import { Rating } from '../app/components/rating/rating';
 
 

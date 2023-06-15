@@ -10,37 +10,79 @@ export async function GET() {
   });
 }
 
+//<--- Seeding DB --->
 // export async function POST(request: Request) {
-//   const memesTags = await memesAPI();
-//   console.log(memesTags);
+//   const memes = await memesAPI();
+//   console.log(memes);
 
-//   for (const meme of memesTags) {
-//     const createMeme = await prisma.meme.createMany({
-//       data: [{ memeID: meme.id, title: meme.name, likes: 0, dislikes: 0 }],
-//     });
-//     console.log("Meme created:", createMeme);
+//   for (const meme of memes) {
+//     try {
+//       const updateResult = await prisma.meme.updateMany({
+//         where: {
+//           memeID: {
+//             contains: meme.id,
+//           },
+//         },
+//         data: {
+//           url: meme.url,
+//         },
+//       });
+
+//       console.log('Zaktualizowano rekordy:', updateResult);
+//     } catch (error) {
+//       console.error('Wystąpił błąd podczas aktualizacji rekordów:', error);
+//     }
 //   }
+
+//   const memesJSON = JSON.stringify({ message: "Likes updated" });
+
+//   return new Response(memesJSON, {
+//     headers: { "Content-Type": "application/json" },
+//   });
 // }
 
-export async function PUT() {
-  const updateMeme = await prisma.meme.update({
-    where: {
-      memeID: "87743020",
-    },
-    data: {
-      likes: 10,
-    },
-  });
-  console.log("Meme updated:", updateMeme);
 
-  const memesJSON = JSON.stringify({ message: "Meme updated" });
+
+//<--- Update Likes in DB --->
+export async function PUT() {
+  let emotion = "Dislike";
+  let updateData: any;
+  if (emotion === "Like") {
+    updateData = {
+      where: {
+        memeID: "87743020",
+      },
+      data: {
+        likes: 10,
+      },
+    };
+  } else if (emotion === "Dislike") {
+    updateData = {
+      where: {
+        memeID: "87743020",
+      },
+      data: {
+        dislikes: 10,
+      },
+    };
+  } else {
+    console.log("Error: emotion not found");
+  }
+
+  const updateMemes = await prisma.meme.update(updateData);
+  console.log("Meme updated:", updateMemes);
+
+  const memesJSON = JSON.stringify({ message: "Likes updated" });
 
   return new Response(memesJSON, {
     headers: { "Content-Type": "application/json" },
   });
 }
 
-export async function getMemes() {
+
+
+//////////////////////////////////////////////////////////////////////
+export async function memesAPI() {
   const url = "https://api.imgflip.com/get_memes";
   try {
     const res = await fetch(url);
@@ -49,12 +91,4 @@ export async function getMemes() {
   } catch (error) {
     console.log(error);
   }
-}
-
-export async function getMemesDB() {
-  const memesDB: MemeDB[] = await prisma.meme.findMany();
-  const memesJSON = JSON.stringify(memesDB);
-  return new Response(memesJSON, {
-    headers: { "Content-Type": "application/json" },
-  });
 }

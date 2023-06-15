@@ -13,5 +13,6 @@ type MemeDB = {
     "title": string,
     "likes": number,
     "dislikes": number,
-    "memeID": string
+    "memeID": string,
+    "url": string
 }

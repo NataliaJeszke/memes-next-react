@@ -13,4 +13,5 @@ model Meme {
   title    String
   likes    Int
   dislikes Int
+  url      String
 }
