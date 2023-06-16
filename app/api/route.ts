@@ -3,7 +3,11 @@ import { PrismaClient, Prisma } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function GET() {
-  const memesDB: MemeDB[] = await prisma.meme.findMany();
+  const memesDB: MemeDB[] = await prisma.meme.findMany({
+    orderBy: {
+      id: "asc",
+    },
+  });
   const memesJSON = JSON.stringify(memesDB);
   return new Response(memesJSON, {
     headers: { "Content-Type": "application/json" },
@@ -43,7 +47,7 @@ export async function GET() {
 
 //<--- Update Likes in DB --->
 export async function PUT(request: Request) {
-  const { memeID, emotion} = await request.json();
+  const { memeID, emotion } = await request.json();
 
   const meme = await prisma.meme.findUnique({
     where: {
