@@ -1,13 +1,12 @@
-const getMemes = async () => {
-    try {
-      const response = await fetch('http://localhost:3000/api');
-      const jsonData = await response.json();
-      setData(jsonData);
-    } catch (error) {
-      console.log('Error fetching data:', error);
-    }
-  };
-
-    export default getMemes;
-
-
+"use client";
+const url = process.env.NEXT_PUBLIC_BACKEND_URL_API;
+export const fetchData = async () => {
+  try {
+    const response = await fetch(`${url}`);
+    const jsonData = await response.json();
+    return jsonData;
+  } catch (error) {
+    console.log("Error fetching data:", error);
+    return [];
+  }
+};

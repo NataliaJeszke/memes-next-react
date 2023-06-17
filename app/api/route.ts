@@ -1,17 +1,34 @@
 import { PrismaClient, Prisma } from "@prisma/client";
+import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
+export async function memesAPI() {
+  const url = "https://api.imgflip.com/get_memes";
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data.data.memes;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function GET() {
-  const memesDB: MemeDB[] = await prisma.meme.findMany({
-    orderBy: {
-      id: "asc",
-    },
-  });
-  const memesJSON = JSON.stringify(memesDB);
-  return new Response(memesJSON, {
-    headers: { "Content-Type": "application/json" },
-  });
+  try{
+    const memesDB: MemeDB[] = await prisma.meme.findMany({
+      orderBy: {
+        id: "asc",
+      },
+    });
+    const memesJSON = JSON.stringify(memesDB);
+    return new Response(memesJSON, {
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+  catch(error){
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+  }
 }
 
 //<--- Seeding DB --->
@@ -47,11 +64,11 @@ export async function GET() {
 
 //<--- Update Likes in DB --->
 export async function PUT(request: Request) {
-  const { memeID, emotion } = await request.json();
+  const { memeKey, emotion } = await request.json();
 
   const meme = await prisma.meme.findUnique({
     where: {
-      memeID: memeID,
+      memeID: memeKey,
     },
   });
 
@@ -62,7 +79,7 @@ export async function PUT(request: Request) {
 
       updateData = {
         where: {
-          memeID: memeID,
+          memeID: memeKey,
         },
         data: {
           likes: likes + 1,
@@ -77,7 +94,7 @@ export async function PUT(request: Request) {
 
       updateData = {
         where: {
-          memeID: memeID,
+          memeID: memeKey,
         },
         data: {
           dislikes: dislikes + 1,
@@ -99,13 +116,3 @@ export async function PUT(request: Request) {
 }
 
 //////////////////////////////////////////////////////////////////////
-export async function memesAPI() {
-  const url = "https://api.imgflip.com/get_memes";
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    return data.data.memes;
-  } catch (error) {
-    console.log(error);
-  }
-}
