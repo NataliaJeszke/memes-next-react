@@ -1,9 +1,10 @@
-export default function Hot(){
+import { Meme } from "../components/meme/memeMain";
 
-    return (
-        <div>
-            <h1>Hot Memes</h1>
-            <Rating />
-        </div>
-    )
+export default function Hot() {
+  return (
+    <div>
+      <h1>Hot Memes</h1>
+      <Meme />
+    </div>
+  );
 }

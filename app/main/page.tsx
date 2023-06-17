@@ -1,23 +1,18 @@
 import React from "react";
 import { Metadata } from "next/types";
 import style from "./main.module.css";
-import { Meme} from "../components/meme/meme";
-
+import { MemeMain } from "../components/meme/memeMain";
 
 export const metadata: Metadata = {
-  title: "Main Memes"
-}
+  title: "Main Memes",
+};
 export default async function Main() {
-
-
   const content = (
     <section className={style.main}>
-    <h2>First 10 memes</h2>
-    <Meme />
+      <h2>Random memes</h2>
+      <MemeMain />
     </section>
-
   );
 
-  return content
+  return content;
 }
-
