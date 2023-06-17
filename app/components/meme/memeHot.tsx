@@ -6,14 +6,14 @@ import { Rate } from "../rate/rate";
 import { Pic } from "../pic/pic";
 import { Title } from "../title/title";
 import {Failure} from "../failure/failure";
-import { fetchData } from "../../../lib/getMemes";
+import { fetchHot } from "../../../lib/hotMemes";
 
 
 export function MemeHot() {
   const [data, setData] = useState<[]>([]);
 
   useEffect(() => {
-    fetchData()
+    fetchHot()
       .then(jsonData => setData(jsonData))
       .catch(error => console.log('Error fetching data:', error));
   }, []);
@@ -28,7 +28,7 @@ export function MemeHot() {
         <div className={style.rating_container}>
           {data.map((meme: MemeDB) => (
             <div key={meme.memeID}>
-              <Pic url={meme.url} key={meme.memeID} />
+              <Pic url={meme.url} memekey={meme.memeID} />
               <Title title={meme.title} />
               <div>
                 <Rate

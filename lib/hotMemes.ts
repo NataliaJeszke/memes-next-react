@@ -1,6 +1,6 @@
 "use client";
-const url = process.env.NEXT_PUBLIC_BACKEND_URL_API;
-export const fetchData = async () => {
+const url = process.env.NEXT_PUBLIC_BACKEND_URL_HOT;
+export const fetchHot = async () => {
   try {
     const response = await fetch(`${url}`);
     if (!response.ok) {

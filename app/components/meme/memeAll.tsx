@@ -18,7 +18,7 @@ export function MemeAll() {
       .catch(error => console.log('Error fetching data:', error));
   }, []);
 
-
+console.log(data)
 
   const memes = () => {
     if (data === undefined || data.length === 0) {
@@ -28,7 +28,7 @@ export function MemeAll() {
         <div className={style.rating_container}>
           {data.map((meme: MemeDB) => (
             <div key={meme.memeID}>
-              <Pic url={meme.url} key={meme.memeID} />
+              <Pic url={meme.url} memekey={meme.memeID} />
               <Title title={meme.title} />
               <div>
                 <Rate

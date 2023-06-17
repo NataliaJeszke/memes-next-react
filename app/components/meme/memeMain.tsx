@@ -38,7 +38,7 @@ export function MemeMain() {
         <div className={style.rating_container}>
           {randomMemes?.slice(0, 10).map((meme: MemeDB) => (
             <div key={meme.memeID}>
-              <Pic url={meme.url} key={meme.memeID} />
+              <Pic url={meme.url} memekey={meme.memeID} />
               <Title title={meme.title} />
               <div>
                 <Rate
