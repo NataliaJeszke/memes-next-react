@@ -18,7 +18,6 @@ export function MemeAll() {
       .catch(error => console.log('Error fetching data:', error));
   }, []);
 
-console.log(data)
 
   const memes = () => {
     if (data === undefined || data.length === 0) {

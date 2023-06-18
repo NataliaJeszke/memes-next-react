@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Nav from "./nav/page";
 import Image from "next/image";
 import styles from "./page.module.css";
+import style_main from "./main.module.css";
 import Link from 'next/link';
 
 const inter = Inter({ subsets: ["latin"] });
@@ -37,8 +38,7 @@ export default function RootLayout({ children }) {
               </a>
             </div>
           </div>
-          <div className={styles.center}>{children}</div>
-
+          <div className={styles.center}><section className={style_main.main}>{children}</section></div>
           <div>
             <Nav />
           </div>

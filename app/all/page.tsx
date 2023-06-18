@@ -6,10 +6,10 @@ export const metadata: Metadata = {
 };
 export default async function All() {
   const content = (
-    <section>
+    <>
       <h2>All Memes</h2>
       <MemeAll />
-    </section>
+    </>
   );
 
   return content;

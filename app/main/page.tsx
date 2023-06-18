@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 };
 export default async function Main() {
   const content = (
-    <section className={style.main}>
+    <>
       <h2>Random memes</h2>
       <MemeMain />
-    </section>
+    </>
   );
 
   return content;

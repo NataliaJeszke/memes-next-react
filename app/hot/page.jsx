@@ -2,9 +2,9 @@ import { MemeHot } from "../components/meme/memeHot";
 
 export default function Hot() {
   return (
-    <div>
-      <h1>Hot Memes</h1>
+    <>
+      <h2>Hot Memes</h2>
       <MemeHot />
-    </div>
+    </>
   );
 }
