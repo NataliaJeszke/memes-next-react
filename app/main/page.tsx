@@ -1,6 +1,6 @@
 import React from "react";
+import style_main from "../main.module.css";
 import { Metadata } from "next/types";
-import style from "./main.module.css";
 import { MemeMain } from "../components/meme/memeMain";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default async function Main() {
   const content = (
     <>
-      <h2>Random memes</h2>
+      <h2 className={style_main.subtitle}>Random memes</h2>
       <MemeMain />
     </>
   );

@@ -1,13 +1,11 @@
-import { Metadata } from "next/types";
 import { MemeAll } from "../components/meme/memeAll";
+import style_main from "../main.module.css";
 
-export const metadata: Metadata = {
-  title: "All Memes",
-};
+
 export default async function All() {
   const content = (
     <>
-      <h2>All Memes</h2>
+      <h2 className={style_main.subtitle}>All Memes</h2>
       <MemeAll />
     </>
   );
