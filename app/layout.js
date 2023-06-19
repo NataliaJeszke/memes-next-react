@@ -1,10 +1,11 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Nav from "./nav/page";
 import Image from "next/image";
+import Nav from "./nav/page";
 import styles from "./page.module.css";
 import style_main from "./main.module.css";
-import Link from 'next/link';
+import Link from "next/link";
+import AddMeme from "./header/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <main className={styles.main}>
           <div className={styles.description}>
-          <Link href="/"><p>Memes Next ReactJS Project</p></Link>
+            <Link href="/">
+              <p>Memes Next ReactJS Project</p>
+            </Link>
             <div>
               <a
                 href="https://github.com/NataliaJeszke"
@@ -38,7 +41,12 @@ export default function RootLayout({ children }) {
               </a>
             </div>
           </div>
-          <div className={styles.center}><section className={style_main.main}>{children}</section></div>
+          <div>
+              <AddMeme />
+            </div>
+          <div className={styles.center}>
+            <section className={style_main.main}>{children}</section>
+          </div>
           <div>
             <Nav />
           </div>
