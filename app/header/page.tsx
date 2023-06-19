@@ -1,19 +1,15 @@
 import Image from "next/image";
 import add from "../../media/add.png";
 import style from "./header.module.css";
+import Link from "next/link";
 
 
 export default function AddMeme(){
     return(
-        <div>
-             <a
-                href="https://github.com/NataliaJeszke"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={style.container}
-              >
-                Add your MEME{" "}
-                <Image
+        <div className={style.container}>
+            <Link href="/form" className={style.container}>
+            Add your MEME{" "}
+            <Image
                   src={add}
                   alt="Add Meme icon"
                   width={40}
@@ -21,7 +17,7 @@ export default function AddMeme(){
                   className={style.addBtn}
                   priority
                 />
-              </a>
+          </Link>
         </div>
     );
 }
