@@ -19,9 +19,8 @@ export function Rate({ initialNumber = 0, emotion, memeKey }: RatingProps) {
     }
   };
 
-
   return (
-    <div>
+    <div style={{ cursor: "pointer" }}>
       <p onClick={handleUpdateMeme}>{emotion}</p>
       <p>{number}</p>
     </div>

@@ -40,6 +40,7 @@ export function MemeMain() {
             <div key={meme.memeID}>
               <Pic url={meme.url} memekey={meme.memeID} />
               <Title title={meme.title} />
+              <div className={style.rate_container}>
               <div>
                 <Rate
                   initialNumber={meme.likes}
@@ -54,6 +55,8 @@ export function MemeMain() {
                   memeKey={meme.memeID}
                 />
               </div>
+              </div>
+              
             </div>
           ))}
         </div>

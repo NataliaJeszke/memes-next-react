@@ -29,6 +29,7 @@ export function MemeAll() {
             <div key={meme.memeID}>
               <Pic url={meme.url} memekey={meme.memeID} />
               <Title title={meme.title} />
+              <div className={style.rate_container}>
               <div>
                 <Rate
                   initialNumber={meme.likes}
@@ -42,6 +43,7 @@ export function MemeAll() {
                   emotion="Dislike"
                   memeKey={meme.memeID}
                 />
+              </div>
               </div>
             </div>
           ))}

@@ -30,6 +30,7 @@ export function MemeHot() {
             <div key={meme.memeID}>
               <Pic url={meme.url} memekey={meme.memeID} />
               <Title title={meme.title} />
+              <div className={style.rate_container}>
               <div>
                 <Rate
                   initialNumber={meme.likes}
@@ -43,6 +44,7 @@ export function MemeHot() {
                   emotion="Dislike"
                   memeKey={meme.memeID}
                 />
+              </div>
               </div>
             </div>
           ))}
