@@ -1,12 +1,12 @@
 import { PrismaClient } from "@prisma/client";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
 
-export async function POST(request: Request) {
+export async function PUT(request: Request) {
   const { title, url } = await request.json();
   try {
-    const memeID = generateUUID(); // Function to generate a UUID
+    const memeID = generateUUID();
 
     const createdMeme = await prisma.meme.create({
       data: {

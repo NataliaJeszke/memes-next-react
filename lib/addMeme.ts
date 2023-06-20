@@ -2,10 +2,10 @@ interface IUAddMeme {
   title: string;
   url: string;
 }
-const url = process.env.NEXT_PUBLIC_BACKEND_URL_API;
+const address = process.env.NEXT_PUBLIC_BACKEND_URL_ADD;
 export const handlePutRequestAddMeme = async ({ title, url }: IUAddMeme) => {
   try {
-    const response = await fetch(`${url}`, {
+    const response = await fetch(`${address}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
