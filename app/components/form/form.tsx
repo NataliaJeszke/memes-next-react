@@ -1,11 +1,37 @@
+"use client";
+import style from "./form.module.css";
+import { useState } from "react";
+import { storage } from "../../firebase/firebase";
+import { ref, uploadBytes } from "firebase/storage";
+
 export default function Form() {
-    return (
-<form action="/send-data-here" method="post">
-  <label htmlFor="first">First name:</label>
-  <input type="text" id="first" name="first" />
-  <label htmlFor="last">Last name:</label>
-  <input type="text" id="last" name="last" />
-  <button type="submit">Submit</button>
-</form>
-    )
+  const [imageUpload, setImageUpload] = useState([]);
+  const uploadImage = () => {
+    event.preventDefault();
+    if (imageUpload === null) {
+      console.log("No image selected");
+      return;
+    }
+
+    const imageRef = ref(storage, imageUpload.name);
+    uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      console.log("Uploaded a blob or file!");
+    });
+  };
+  return (
+    <form onSubmit={uploadImage} className={style.form_container}>
+      <div>
+        <label htmlFor="file">Upload</label>
+        <input
+          type="file"
+          id="memeFile"
+          name="memeFile"
+          onChange={(event) => {
+            setImageUpload(event.target.files[0]);
+          }}
+        />
+      </div>
+      <button type="submit">Upload</button>
+    </form>
+  );
 }
