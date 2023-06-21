@@ -3,19 +3,8 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function memesAPI() {
-  const url = "https://api.imgflip.com/get_memes";
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    return data.data.memes;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 export async function GET() {
-  try{
+  try {
     const memesDB: MemeDB[] = await prisma.meme.findMany({
       orderBy: {
         id: "asc",
@@ -25,9 +14,11 @@ export async function GET() {
     return new Response(memesJSON, {
       headers: { "Content-Type": "application/json" },
     });
-  }
-  catch(error){
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
 
@@ -114,5 +105,3 @@ export async function PUT(request: Request) {
     headers: { "Content-Type": "application/json" },
   });
 }
-
-//////////////////////////////////////////////////////////////////////

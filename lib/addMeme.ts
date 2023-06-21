@@ -12,13 +12,7 @@ export const handlePutRequestAddMeme = async ({ title, url }: IUAddMeme) => {
       },
       body: JSON.stringify({ title, url }),
     });
-
-    if (response.ok) {
-      // Sukces - przetwarzanie odpowiedzi
-    } else {
-      // Obsługa błędu
-    }
   } catch (error) {
-    // Obsługa błędu sieciowego
+    console.log("Error adding meme to db:", error);
   }
 };

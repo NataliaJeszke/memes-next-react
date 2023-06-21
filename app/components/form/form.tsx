@@ -1,4 +1,5 @@
 "use client";
+
 import style from "./form.module.css";
 import { useState } from "react";
 import { storage } from "../../firebase/firebase";
@@ -12,9 +13,9 @@ import {
 import { handlePutRequestAddMeme } from "../../../lib/addMeme";
 
 export default function Form() {
-  const [imageUpload, setImageUpload] = useState([]);
+  const [imageUpload, setImageUpload] = useState<File | null>(null);
 
-  const uploadImage = () => {
+  const uploadImage = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (imageUpload === null) {
       console.log("No image selected");
@@ -23,28 +24,31 @@ export default function Form() {
 
     const imageRef = ref(storage, imageUpload.name);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      setImageUpload(imageUpload.name);
+      setImageUpload(imageUpload);
       console.log("Uploaded a blob or file!");
 
-      function getURL(imageRef: StorageReference) {
-        const title = imageUpload.name;
-        getDownloadURL(imageRef)
-          .then((url) => {
-            handleUpdateDB(url, title);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
       getURL(imageRef);
 
-      const handleUpdateDB = async (url: string, title: string) => {
+      async function getURL(imageRef: StorageReference) {
+        if (imageUpload === null) {
+          return;
+        }
+        const title = imageUpload.name;
         try {
-          handlePutRequestAddMeme({ title, url });
+          const url = await getDownloadURL(imageRef);
+          handleUpdateDB(url, title);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      async function handleUpdateDB(url: string, title: string) {
+        try {
+          await handlePutRequestAddMeme({ title, url });
         } catch (error) {
           console.error(error);
         }
-      };
+      }
     });
   };
 
@@ -57,7 +61,7 @@ export default function Form() {
           id="memeFile"
           name="memeFile"
           onChange={(event) => {
-            setImageUpload(event.target.files[0]);
+            setImageUpload(event.target.files![0]);
           }}
         />
       </div>
