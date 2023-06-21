@@ -14,6 +14,7 @@ import { handlePutRequestAddMeme } from "../../../lib/addMeme";
 
 export default function Form() {
   const [imageUpload, setImageUpload] = useState<File | null>(null);
+  const [isMemeSent, setMemeSent] = useState(false);
 
   const uploadImage = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -49,23 +50,27 @@ export default function Form() {
           console.error(error);
         }
       }
+      setMemeSent(true); // Move the setMemeSent inside the promise callback
     });
   };
 
   return (
-    <form onSubmit={uploadImage} className={style.form_container}>
-      <div>
-        <label htmlFor="file">Upload</label>
-        <input
-          type="file"
-          id="memeFile"
-          name="memeFile"
-          onChange={(event) => {
-            setImageUpload(event.target.files![0]);
-          }}
-        />
-      </div>
-      <button type="submit">Upload</button>
-    </form>
+    <div>
+      <form onSubmit={uploadImage} className={style.form_container}>
+        <div>
+          <label htmlFor="file">Upload</label>
+          <input
+            type="file"
+            id="memeFile"
+            name="memeFile"
+            onChange={(event) => {
+              setImageUpload(event.target.files![0]);
+            }}
+          />
+        </div>
+        <button type="submit">Upload</button>
+      </form>
+      {isMemeSent && <div>Your meme was sent! Check All Memes section!</div>}
+    </div>
   );
 }
