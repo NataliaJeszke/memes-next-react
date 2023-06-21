@@ -50,7 +50,7 @@ export default function Form() {
           console.error(error);
         }
       }
-      setMemeSent(true); // Move the setMemeSent inside the promise callback
+      setMemeSent(true);
     });
   };
 
