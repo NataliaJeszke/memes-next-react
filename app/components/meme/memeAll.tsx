@@ -5,24 +5,26 @@ import style from "./meme.module.css";
 import { Rate } from "../rate/rate";
 import { Pic } from "../pic/pic";
 import { Title } from "../title/title";
-import {Failure} from "../failure/failure";
+import { Failure } from "../failure/failure";
 import { fetchData } from "../../../lib/getMemes";
-
 
 export function MemeAll() {
   const [data, setData] = useState<[]>([]);
 
   useEffect(() => {
     fetchData()
-      .then(jsonData => setData(jsonData))
-      .catch(error => console.log('Error fetching data:', error));
-  });
-
+      .then((jsonData) => setData(jsonData))
+      .catch((error) => console.log("Error fetching data:", error));
+  }, [data]);
 
   const memes = () => {
     if (data === undefined || data.length === 0) {
-      return(<div><Failure data={data}/></div>)
-    }else{
+      return (
+        <div>
+          <Failure data={data} />
+        </div>
+      );
+    } else {
       return (
         <div className={style.rating_container}>
           {data.map((meme: MemeDB) => (
@@ -30,20 +32,20 @@ export function MemeAll() {
               <Pic url={meme.url} memekey={meme.memeID} />
               <Title title={meme.title} />
               <div className={style.rate_container}>
-              <div>
-                <Rate
-                  initialNumber={meme.likes}
-                  emotion="Like"
-                  memeKey={meme.memeID}
-                />
-              </div>
-              <div>
-                <Rate
-                  initialNumber={meme.dislikes}
-                  emotion="Dislike"
-                  memeKey={meme.memeID}
-                />
-              </div>
+                <div>
+                  <Rate
+                    initialNumber={meme.likes}
+                    emotion="Like"
+                    memeKey={meme.memeID}
+                  />
+                </div>
+                <div>
+                  <Rate
+                    initialNumber={meme.dislikes}
+                    emotion="Dislike"
+                    memeKey={meme.memeID}
+                  />
+                </div>
               </div>
             </div>
           ))}
