@@ -16,7 +16,7 @@ export function MemeHot() {
     fetchHot()
       .then(jsonData => setData(jsonData))
       .catch(error => console.log('Error fetching data:', error));
-  }, []);
+  });
 
 
 
