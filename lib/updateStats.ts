@@ -14,11 +14,11 @@ export const handlePutRequest = async ({memeKey, emotion}:IUpdateStats) => {
     });
 
     if (response.ok) {
-      // Sukces - przetwarzanie odpowiedzi
+      console.log('response ok');
     } else {
-      // Obsługa błędu
+      console.log('response not ok');
     }
   } catch (error) {
-    // Obsługa błędu sieciowego
+    console.log(error);
   }
 };
